@@ -96,7 +96,7 @@ source ~/.bashrc
 rm -rf /usr/local/go
 ```
 
-### ARM64 (RaspberiPI)
+### ARM64
 
 ```
 wget "https://go.dev/dl/go1.19.2.linux-amd64.tar.gz" -4
