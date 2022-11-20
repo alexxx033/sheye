@@ -42,7 +42,7 @@ apt install php8.1-fpm php8.1-cli php8.1-zip php8.1-mbstring php8.1-xml php8.1-d
 
 
 
-## GO
+## Golang
 
 You need to install **golang >= 1.9**
 
@@ -91,7 +91,7 @@ php -r "unlink('composer-setup.php');"
 mv composer.phar /usr/local/bin/composer
 ```
 
-## Database setup
+# Database
 
 ```
 mysql -e "UPDATE mysql.user SET Password = PASSWORD('12345') WHERE User = 'root'"
@@ -106,7 +106,7 @@ mysql -e "FLUSH PRIVILEGES";
 ```
 
 
-## Setup
+# Setup
 
 Download the **main** branch or **release** version and extract sources to folder, F.E **/var/www/html**
 
@@ -127,14 +127,18 @@ php artisan db:seed --class=ScannerSeeder
 php artisan add:user admin admin
 ```
 
-### Scanners setup 
+# Scanners
 
 
 All scanners should be located in **scanners** folder (**/var/www/html/scanners**). You can find example compilation for **arm64**, just change to **amd64** for x64 architecture.
 
-1. **amass**
+## **amass**
 
 Install **amass** to **scanners/amass_linux** folder.
+
+
+### ARM64
+
 ```
 wget https://github.com/OWASP/Amass/releases/download/v3.20.0/amass_linux_arm64.zip
 unzip amass_linux_arm64.zip
@@ -143,9 +147,21 @@ rm -f amass_linux_arm64.zip
 ```
 
 
-2. **assetfinder**
+### AMD64
 
-Below you can find how to compile assetfinder for RaspberiPI (**arm64**)
+```
+wget https://github.com/OWASP/Amass/releases/download/v3.20.0/amass_linux_amd64.zip
+unzip amass_linux_arm64.zip
+mv amass_linux_arm64 amass_linux
+rm -f amass_linux_arm64.zip
+```
+
+
+
+## assetfinder
+
+
+### ARM64 
 
 ```
 git clone https://github.com/tomnomnom/assetfinder asset
@@ -153,52 +169,81 @@ cd asset
 go mod init go.mod
 go mod tidy
 GOOS=linux GOARCH=arm64 go build -o assetfinder
-mv assetfinder ../
-cd ../
-rm -rf asset/
+mv assetfinder /var/www/html/scanners
 ```
 
-3. **subfinder**
+### AMD64
+
+```
+git clone https://github.com/tomnomnom/assetfinder asset
+cd asset
+go mod init go.mod
+go mod tidy
+GOOS=linux GOARCH=amd64 go build -o assetfinder
+mv assetfinder /var/www/html/scanners
+```
+
+
+
+## subfinder
+
+
+### ARM64 
 
 ```
 wget https://github.com/projectdiscovery/subfinder/releases/download/v2.5.4/subfinder_2.5.4_linux_arm64.zip
 unzip subfinder_2.5.4_linux_arm64.zip
+mv subfinder/var/www/html/scanners/
 rm -f subfinder_2.5.4_linux_arm64.zip
 ```
 
-4. **httpx**
+
+### AMD64 
+
+```
+wget https://github.com/projectdiscovery/subfinder/releases/download/v2.5.4/subfinder_2.5.4_linux_amd64.zip
+unzip subfinder_2.5.4_linux_amd64.zip
+mv subfinder/var/www/html/scanners/
+rm -f subfinder_2.5.4_linux_amd64.zip
+```
+
+
+
+## httpx
 
 ```
 go install -v github.com/projectdiscovery/httpx/cmd/httpx@latest
 mv /root/go/bin/httpx /var/www/html/scanners/
 ```
 
-5. **nuclei**
+## nuclei
 ```
 go install -v github.com/projectdiscovery/nuclei/v2/cmd/nuclei@latest
 mv /root/go/bin/nuclei /var/www/html/scanners/
 ```
 
-6. **dnsx**
+## dnsx
 ```
 go install -v github.com/projectdiscovery/dnsx/cmd/dnsx@latest
 mv /root/go/bin/dnsx /var/www/html/scanners/
 ```
 
-7. **gau**
+## gau
 ```
 go install github.com/lc/gau/v2/cmd/gau@latest
 mv /root/go/bin/gau /var/www/html/scanners/
 ```
 
-8. **screenshot**
+## screenshot
+
+The screenshot is a custom version of https://github.com/zzzteph/screenshot. Navigate **/var/www/html/scanners/screenshot**
+
 
 ```
-cd screenshot
 mvn package
 ```
 
-9. **dirsearch**
+## dirsearch
 
 ```
 git clone https://github.com/maurosoria/dirsearch.git --depth 1
