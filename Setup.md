@@ -39,6 +39,41 @@ apt install php8.1-fpm php8.1-cli php8.1-zip php8.1-mbstring php8.1-xml php8.1-d
 ```
 
 
+## Nginx
+
+Configure Nginx to serve the app
+
+```
+server {
+listen 80;
+    server_name _;
+    root /var/www/html/public; #change to correct folder
+    large_client_header_buffers 4 16k;
+    index index.php;
+
+    client_max_body_size 100m;
+    charset utf-8;
+
+  location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+
+    location = /favicon.ico { access_log off; log_not_found off; }
+    location = /robots.txt  { access_log off; log_not_found off; }
+
+    error_page 404 /index.php;
+
+    location ~ \.php$ {
+        fastcgi_pass unix:/var/run/php/php8.1-fpm.sock;
+        fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
+        include fastcgi_params;
+    }
+
+    location ~ /\.(?!well-known).* {
+        deny all;
+    }
+}
+```
 
 
 
@@ -114,6 +149,7 @@ Navigate **/var/www/html**
 
 Make some folders and files writable
 ```
+php artisan storage:link
 chmod 777 -R storage/
 chmod 777 *.log
 ```
@@ -254,50 +290,9 @@ chmod 777 -R dirsearch
 ```
 
 
+# Workers
 
-
-### Nginx configuration
-
-Configure nginx to serve the app
-
-```
-server {
-listen 80;
-    server_name _;
-    root /var/www/sheye/public;
-    large_client_header_buffers 4 16k;
-    index index.php;
-
-    client_max_body_size 100m;
-    charset utf-8;
-
-  location / {
-        try_files $uri $uri/ /index.php?$query_string;
-    }
-
-    location = /favicon.ico { access_log off; log_not_found off; }
-    location = /robots.txt  { access_log off; log_not_found off; }
-
-    error_page 404 /index.php;
-
-    location ~ \.php$ {
-        fastcgi_pass unix:/var/run/php/php8.1-fpm.sock;
-        fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
-        include fastcgi_params;
-    }
-
-    location ~ /\.(?!well-known).* {
-        deny all;
-    }
-}
-```
-
-
-
-### Launch workers process
-
-
-Workers are located at **workers.sh** file. You need to lauch that file in background or with **screen**.
+Workers are located at **workers.sh** file. You must launch that file in the background or with **screen**.
 
 ```
 cd /var/www/html
