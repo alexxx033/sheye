@@ -9,7 +9,7 @@
 
 # Packages 
 
-`apt-get install python3-dev python3-pip nginx  default-jdk wget maven nginx curl unzip xvfb libxi6 libgconf-2-4 python2.7  unzip mariadb-server  git nmap `
+`apt-get install python3-dev python3-pip nginx imagemagick default-jdk wget maven nginx curl unzip xvfb libxi6 libgconf-2-4 python2.7  unzip mariadb-server  git nmap `
 
 
 **If you use **Ubuntu** based distro**
