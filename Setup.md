@@ -35,6 +35,7 @@ If you use **Debian** based distro or **php8** is missing, you can do next
 sudo apt install -y lsb-release ca-certificates apt-transport-https software-properties-common gnupg2
 echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/sury-php.list
 curl -fsSL  https://packages.sury.org/php/apt.gpg| sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/sury-keyring.gpg
+apt-get update
 apt install php8.1-fpm php8.1-cli php8.1-zip php8.1-mbstring php8.1-xml php8.1-dev php8.1-mysql php8.1-pdo php8.1-curl php8.1-bcmath php8.1-dom php8.1-ctype php8.1-cli
 ```
 
