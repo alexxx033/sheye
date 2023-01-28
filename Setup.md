@@ -82,7 +82,7 @@ listen 80;
 
 You need to install **golang >= 1.9**
 
-### AMD64
+### ARM64
 
 ```
 wget "https://go.dev/dl/go1.19.2.linux-arm64.tar.gz" -4
@@ -94,7 +94,7 @@ export PATH=/usr/local/go/bin:$PATH:$GOPATH/bin
 EOF
 
 source ~/.bashrc
-rm -rf /usr/local/go
+
 ```
 
 ### ARM64
@@ -109,7 +109,7 @@ export PATH=/usr/local/go/bin:$PATH:$GOPATH/bin
 EOF
 
 source ~/.bashrc
-rm -rf /usr/local/go
+
 ```
 
 
