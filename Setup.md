@@ -148,13 +148,6 @@ Download the **main** branch or **release** version and extract sources to folde
 
 Navigate **/var/www/html**
 
-Make some folders and files writable
-```
-php artisan storage:link
-chmod 777 -R storage/
-chmod 777 *.log
-```
-
 Run composer, migrations,seeders and add **admin user** from **/var/www/html**
 
 ```
@@ -163,6 +156,16 @@ php artisan migrate
 php artisan db:seed --class=ScannerSeeder
 php artisan add:user admin admin
 ```
+
+
+Make some folders and files writable
+```
+php artisan storage:link
+chmod 777 -R storage/
+chmod 777 *.log
+```
+
+
 
 # Scanners
 
