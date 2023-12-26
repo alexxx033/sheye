@@ -191,9 +191,9 @@ rm -f amass_linux_arm64.zip
 
 ```
 wget https://github.com/OWASP/Amass/releases/download/v3.20.0/amass_linux_amd64.zip
-unzip amass_linux_arm64.zip
-mv amass_linux_arm64 amass_linux
-rm -f amass_linux_arm64.zip
+unzip amass_linux_amd64.zip
+mv amass_linux_amd64 amass_linux
+rm -f amass_linux_amd64.zip
 ```
 
 
